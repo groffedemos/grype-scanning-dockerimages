@@ -1,0 +1,47 @@
+name: grype-security-scan
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REPORT_NAME: 'resultados_renatogroffe_dotnet10-job-httprequest'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Instalar o Grype
+        run: |
+          curl -sSfL https://get.anchore.io/grype | sudo sh -s -- -b /usr/local/bin
+
+      - name: Testando o Grype apos a instalacao
+        run: |
+          grype --help
+
+      - name: Baixando a imagem a ser analisada
+        run: |
+          docker pull renatogroffe/apicontagem:latest
+
+      - name: Exibir imagens presentes no ambiente
+        run: |
+          docker images
+
+      - name: Analisando imagem com Grype
+        run: |
+          grype renatogroffe/dotnet10-job-httprequest:2 --output table --output ${{ env.REPORT_NAME }}.sarif
+
+      - name: Exibir imagens apos analise com Grype
+        run: |
+          docker images
+
+      - name: Exibir arquivos no diretorio-raiz
+        run: |
+          pwd
+          echo
+          ls -l
