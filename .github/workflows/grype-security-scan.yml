@@ -34,7 +34,7 @@ jobs:
 
       - name: Analisando imagem com Grype
         run: |
-          grype renatogroffe/dotnet10-job-httprequest:2 --output table --output ${{ env.REPORT_NAME }}.sarif
+          grype renatogroffe/dotnet10-job-httprequest:2 --output table --output sarif=${{ env.REPORT_NAME }}.sarif
 
       - name: Exibir imagens apos analise com Grype
         run: |
