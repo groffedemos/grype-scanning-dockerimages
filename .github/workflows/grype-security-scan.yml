@@ -34,7 +34,7 @@ jobs:
 
       - name: Analisando imagem com Grype
         run: |
-          grype renatogroffe/dotnet10-job-httprequest:2 --output table --output sarif=${{ env.REPORT_NAME }}.sarif
+          grype renatogroffe/dotnet10-job-httprequest:2 --output table --output sarif=grype-analysis.sarif
 
       - name: Exibir imagens apos analise com Grype
         run: |
@@ -45,3 +45,10 @@ jobs:
           pwd
           echo
           ls -l
+
+      - name: Upload arquivo SARIF file
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ./results/grype-analysis.sarif
+          category: sast-tools
