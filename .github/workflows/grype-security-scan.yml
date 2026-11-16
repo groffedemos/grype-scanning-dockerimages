@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  # CONTAINER_IMAGE: 'renatogroffe/dotnet10-job-httprequest:2'
+  CONTAINER_IMAGE: 'renatogroffe/dotnet10-job-httprequest:2'
   # CONTAINER_IMAGE: 'renatogroffe/apicontagem:latest'
-  CONTAINER_IMAGE: 'mcr.microsoft.com/dotnet/sdk:11.0.100'
+  # CONTAINER_IMAGE: 'mcr.microsoft.com/dotnet/sdk:11.0.100'
 
 jobs:
   scan:
