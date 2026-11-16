@@ -28,7 +28,7 @@ jobs:
 
       - name: Baixando a imagem a ser analisada
         run: |
-          docker pull renatogroffe/apicontagem:latest
+          docker pull ${{ env.CONTAINER_IMAGE }}
 
       - name: Exibir imagens presentes no ambiente
         run: |
